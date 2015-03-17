@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MyPicturesFolderCleaner
+namespace MyPicturesFolderOrganizer
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

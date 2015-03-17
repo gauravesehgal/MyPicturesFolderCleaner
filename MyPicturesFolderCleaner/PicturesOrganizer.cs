@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace MyPicturesFolderCleaner
+namespace MyPicturesFolderOrganizer
 {
     public static class PicturesOrganizer
     {
