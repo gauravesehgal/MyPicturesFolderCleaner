@@ -26,11 +26,20 @@ namespace MyPicturesFolderOrganizer
             OrganizePictures(parentFolderPath, pictures);
             OrganizeMovies(parentFolderPath, movies);
             OrganizeOtherFiles(parentFolderPath, parentFolderPath);
-            DeleteEmptyFolders();
+            DeleteEmptyFolders(parentFolderPath);
         }
 
-        private static void DeleteEmptyFolders()
+        private static void DeleteEmptyFolders(string parentFolderPath)
         {
+            foreach (var folder in Directory.GetDirectories(parentFolderPath))
+            {
+                DeleteEmptyFolders(folder);
+                if (Directory.GetFiles(folder).Length == 0 &&
+                    Directory.GetDirectories(folder).Length == 0)
+                {
+                    Directory.Delete(folder, false);
+                }
+            }
         }
 
         private static void OrganizeOtherFiles(string parentFolderPath1, string parentFolderPath2)
