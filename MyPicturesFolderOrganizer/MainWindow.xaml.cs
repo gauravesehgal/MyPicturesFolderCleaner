@@ -22,6 +22,7 @@ namespace MyPicturesFolderOrganizer
         private void Organize_Click(object sender, RoutedEventArgs e)
         {
             PicturesOrganizer.Organize(txtSelectedFolder.Text);
+            MessageBox.Show("Organizing pictures done. Duplicates are moved to duplicates folder, Other files are moved to OtherFiles folder, Empty folders are deleted.");
         }
     }
 }

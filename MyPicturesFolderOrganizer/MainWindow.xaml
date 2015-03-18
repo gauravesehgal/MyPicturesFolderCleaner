@@ -2,10 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="MyPicturesFolderOrganizer.MainWindow"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid Margin="0,10,0,134">
+        Title="MainWindow" Height="205" Width="523">
+    <Grid Margin="0,10,0,0" Height="143" VerticalAlignment="Top">
         <Button Content="Browse" HorizontalAlignment="Left" Margin="416,71,0,0" VerticalAlignment="Top" Width="80" Click="BrowseButton_Click"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="10,71,0,0" TextWrapping="Wrap" Text="Select folder by clicking Browse button or paste the folder path here." VerticalAlignment="Top" Width="401" Name="txtSelectedFolder"/>
-        <Button Content="Organize Pictures" HorizontalAlignment="Left" Margin="384,111,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="1.295,-0.545" Click="Organize_Click"/>
+        <Button Content="Organize Pictures" HorizontalAlignment="Left" Margin="385,111,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="1.295,-0.545" Click="Organize_Click"/>
     </Grid>
 </Window>
