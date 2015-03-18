@@ -47,7 +47,7 @@ namespace MyPicturesFolderOrganizer
             CreateFolderIfNotExist(parentFolderPath, "OtherFiles");
             var otherFilesFolder = parentFolderPath + @"\OtherFiles";
             foreach (var otherFile in otherFiles)
-            {
+            { 
                 MoveToFolder(otherFilesFolder, otherFile, otherFilesFolder);
             }
         }
