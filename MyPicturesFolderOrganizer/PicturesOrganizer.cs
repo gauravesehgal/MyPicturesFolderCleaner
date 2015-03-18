@@ -45,7 +45,7 @@ namespace MyPicturesFolderOrganizer
         private static void OrganizeOtherFiles(string parentFolderPath, IEnumerable<string> otherFiles)
         {
             CreateFolderIfNotExist(parentFolderPath, "OtherFiles");
-            var otherFilesFolder = parentFolderPath + @"/OtherFiles";
+            var otherFilesFolder = parentFolderPath + @"\OtherFiles";
             foreach (var otherFile in otherFiles)
             {
                 MoveToFolder(otherFilesFolder, otherFile, otherFilesFolder);
@@ -55,7 +55,7 @@ namespace MyPicturesFolderOrganizer
         private static void OrganizeMovies(string parentFolderPath, IEnumerable<string> movies)
         {
             CreateFolderIfNotExist(parentFolderPath, "Movies");
-            var moviesFolderPath = parentFolderPath + @"/Movies";
+            var moviesFolderPath = parentFolderPath + @"\Movies";
             foreach (var movie in movies)
             {
                 MoveToFolder(moviesFolderPath, movie, moviesFolderPath);
@@ -80,9 +80,10 @@ namespace MyPicturesFolderOrganizer
         private static void MoveToFolder(string parentFolderPath, string filePath, string newFolderPath, int duplicateCounter = 0)
         {
             var fileName = Path.GetFileName(filePath);
+            
             if (duplicateCounter > 0)
             {
-                fileName = string.Format("{0}_Dup{1}", fileName, duplicateCounter);
+                fileName = string.Format("{0}_Dup{1}{2}", Path.GetFileNameWithoutExtension(filePath), duplicateCounter, Path.GetExtension(filePath));
             }
 
             try
