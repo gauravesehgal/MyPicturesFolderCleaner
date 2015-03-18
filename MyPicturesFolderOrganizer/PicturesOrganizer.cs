@@ -19,13 +19,13 @@ namespace MyPicturesFolderOrganizer
                 throw new IOException("Folder selected is not a valid folder.");
 
             var allFiles = Directory.EnumerateFiles(parentFolderPath, "*.*", SearchOption.AllDirectories);
-            var pictures = allFiles.Where(f => f.EndsWith(".JPG"));
-            var movies = allFiles.Where(f => f.EndsWith(".MOV"));
-            var otherFiles = allFiles.Where(f => !(f.EndsWith(".JPG") || f.EndsWith(".MOV")));
+            var pictures = allFiles.Where(f => f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase)  );
+            var movies = allFiles.Where(f => f.EndsWith(".MOV", StringComparison.OrdinalIgnoreCase));
+            var otherFiles = allFiles.Where(f => !(f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".MOV", StringComparison.OrdinalIgnoreCase)));
 
             OrganizePictures(parentFolderPath, pictures);
             OrganizeMovies(parentFolderPath, movies);
-            OrganizeOtherFiles(parentFolderPath, parentFolderPath);
+            OrganizeOtherFiles(parentFolderPath, otherFiles);
             DeleteEmptyFolders(parentFolderPath);
         }
 
@@ -42,12 +42,24 @@ namespace MyPicturesFolderOrganizer
             }
         }
 
-        private static void OrganizeOtherFiles(string parentFolderPath1, string parentFolderPath2)
+        private static void OrganizeOtherFiles(string parentFolderPath, IEnumerable<string> otherFiles)
         {
+            CreateFolderIfNotExist(parentFolderPath, "OtherFiles");
+            var otherFilesFolder = parentFolderPath + @"/OtherFiles";
+            foreach (var otherFile in otherFiles)
+            {
+                MoveToFolder(otherFilesFolder, otherFile, otherFilesFolder);
+            }
         }
 
         private static void OrganizeMovies(string parentFolderPath, IEnumerable<string> movies)
         {
+            CreateFolderIfNotExist(parentFolderPath, "Movies");
+            var moviesFolderPath = parentFolderPath + @"/Movies";
+            foreach (var movie in movies)
+            {
+                MoveToFolder(moviesFolderPath, movie, moviesFolderPath);
+            }
         }
 
         private static void OrganizePictures(string parentFolderPath, IEnumerable<string> pictures)
@@ -65,9 +77,9 @@ namespace MyPicturesFolderOrganizer
             }
         }
 
-        private static void MoveToFolder(string parentFolderPath, string picture, string newFolderPath, int duplicateCounter = 0)
+        private static void MoveToFolder(string parentFolderPath, string filePath, string newFolderPath, int duplicateCounter = 0)
         {
-            var fileName = Path.GetFileName(picture);
+            var fileName = Path.GetFileName(filePath);
             if (duplicateCounter > 0)
             {
                 fileName = string.Format("{0}_Dup{1}", fileName, duplicateCounter);
@@ -75,7 +87,7 @@ namespace MyPicturesFolderOrganizer
 
             try
             {
-                File.Move(picture, newFolderPath + @"\" + fileName);
+                File.Move(filePath, newFolderPath + @"\" + fileName);
             }
             catch (IOException ex)
             {
@@ -84,7 +96,7 @@ namespace MyPicturesFolderOrganizer
                     CreateFolderIfNotExist(parentFolderPath, "Duplicates");
 
                     duplicateCounter = ++duplicateCounter;
-                    MoveToFolder(parentFolderPath, picture, parentFolderPath + @"\Duplicates", duplicateCounter);
+                    MoveToFolder(parentFolderPath, filePath, parentFolderPath + @"\Duplicates", duplicateCounter);
                 }
                 else
                     throw;
