@@ -1,4 +1,4 @@
-# MyPicturesFolderOrganizer
+# MyPicturesOrganizer
 ### Organizes Pictures (JPEGs), Movie Files (.MOV)
 
 * Organizes pictures(only JPEG for now) inside a folder/subfolder/tree into a new folder structure by [Year][Month].
