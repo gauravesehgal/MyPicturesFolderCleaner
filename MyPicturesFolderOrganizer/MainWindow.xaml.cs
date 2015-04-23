@@ -39,7 +39,7 @@ namespace PicturesVideosOrganizer
             if (e.Error != null)
                 throw e.Error;
             
-            MessageBox.Show("Organizing pictures done. Duplicates are moved to duplicates folder, Other files are moved to OtherFiles folder, Empty folders are deleted.");
+            MessageBox.Show("Organizing pictures done. Duplicates are moved to duplicates folder, Other files are moved to OtherFiles folder, Empty folders are deleted.", "Aha...",MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)

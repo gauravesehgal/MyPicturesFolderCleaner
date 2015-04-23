@@ -16,7 +16,8 @@ namespace PicturesVideosOrganizer
         {
             XmlConfigurator.Configure();
             _logger.Error(e.Exception);
-            MessageBox.Show(e.Exception.Message);
+
+            MessageBox.Show(e.Exception.Message, "Something is not right.", MessageBoxButton.OK, MessageBoxImage.Error);
             e.Handled = true;
         } 
     }
