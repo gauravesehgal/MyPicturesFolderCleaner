@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -20,7 +19,7 @@ namespace PicturesVideosOrganizer
                 throw new IOException("Folder selected is not a valid folder.");
 
             var allFiles = Directory.EnumerateFiles(parentFolderPath, "*.*", SearchOption.AllDirectories);
-            var pictures = allFiles.Where(f => f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase)  );
+            var pictures = allFiles.Where(f => f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase));
             var movies = allFiles.Where(f => f.EndsWith(".MOV", StringComparison.OrdinalIgnoreCase));
             var otherFiles = allFiles.Where(f => !(f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".MOV", StringComparison.OrdinalIgnoreCase)));
 
@@ -112,19 +111,18 @@ namespace PicturesVideosOrganizer
 
         private static DateTime GetDateTakenFromImage(string path)
         {
-            using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
-            using (Image image = Image.FromStream(fs, false, false))
+            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+            using (var image = Image.FromStream(fs, false, false))
             {
-                var propertyId = 36867;
-                if (image.PropertyIdList.Any(propId => propId == propertyId))
-                {
-                    PropertyItem propItem = image.GetPropertyItem(propertyId);
+                const int propertyId = 36867;
+                if (!image.PropertyIdList.Any(propId => propId == propertyId)) 
+                    return File.GetCreationTime(path);
 
-                    var dateTaken = R.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
+                var propItem = image.GetPropertyItem(propertyId);
 
-                    return DateTime.Parse(dateTaken);
-                }
-                return File.GetCreationTime(path);
+                var dateTaken = R.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
+
+                return DateTime.Parse(dateTaken);
             }
         }
     }
