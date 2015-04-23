@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Threading;
 using log4net;
 using log4net.Config;
 
-namespace MyPicturesFolderOrganizer
+namespace PicturesVideosOrganizer
 {
     /// <summary>
     /// Interaction logic for App.xaml

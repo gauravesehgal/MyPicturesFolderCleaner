@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
@@ -7,11 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MyPicturesFolderOrganizer
+namespace PicturesVideosOrganizer
 {
-    public static class PicturesOrganizer
+    public static class Organizer
     {
-        private static Regex r = new Regex(":");
+        private static readonly Regex R = new Regex(":");
 
         public static void Organize(string parentFolderPath)
         {
@@ -112,14 +113,14 @@ namespace MyPicturesFolderOrganizer
         private static DateTime GetDateTakenFromImage(string path)
         {
             using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
-            using (System.Drawing.Image image = System.Drawing.Image.FromStream(fs, false, false))
+            using (Image image = Image.FromStream(fs, false, false))
             {
                 var propertyId = 36867;
                 if (image.PropertyIdList.Any(propId => propId == propertyId))
                 {
                     PropertyItem propItem = image.GetPropertyItem(propertyId);
 
-                    var dateTaken = r.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
+                    var dateTaken = R.Replace(Encoding.UTF8.GetString(propItem.Value), "-", 2);
 
                     return DateTime.Parse(dateTaken);
                 }
