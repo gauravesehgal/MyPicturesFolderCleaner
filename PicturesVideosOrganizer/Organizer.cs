@@ -20,8 +20,8 @@ namespace PicturesVideosOrganizer
 
             var allFiles = Directory.EnumerateFiles(parentFolderPath, "*.*", SearchOption.AllDirectories).Where(f => !Path.GetDirectoryName(f).Contains("Duplicates"));
             var pictures = allFiles.Where(f => f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase));
-            var movies = allFiles.Where(f => f.EndsWith(".MOV", StringComparison.OrdinalIgnoreCase));
-            var otherFiles = allFiles.Where(f => !(f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".MOV", StringComparison.OrdinalIgnoreCase)));
+            var movies = allFiles.Where(f => f.EndsWith(".MOV", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".avi", StringComparison.OrdinalIgnoreCase));
+            var otherFiles = allFiles.Where(f => !(f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".MOV", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".avi", StringComparison.OrdinalIgnoreCase)));
 
             OrganizePictures(parentFolderPath, pictures);
             OrganizeMovies(parentFolderPath, movies);
@@ -83,7 +83,7 @@ namespace PicturesVideosOrganizer
 
             if (duplicateCounter > 0)
             {
-                fileName = string.Format("{0}_Dup{1}{2}", Path.GetFileNameWithoutExtension(filePath), duplicateCounter, Path.GetExtension(filePath));
+                fileName = string.Format("{0}_Duplicate{1}{2}", Path.GetFileNameWithoutExtension(filePath), duplicateCounter, Path.GetExtension(filePath));
             }
 
             try
