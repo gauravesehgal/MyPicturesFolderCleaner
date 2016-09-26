@@ -18,7 +18,7 @@ namespace PicturesVideosOrganizer
             if (!Directory.Exists(parentFolderPath))
                 throw new IOException("Folder selected is not a valid folder.");
 
-            var allFiles = Directory.EnumerateFiles(parentFolderPath, "*.*", SearchOption.AllDirectories);
+            var allFiles = Directory.EnumerateFiles(parentFolderPath, "*.*", SearchOption.AllDirectories).Where(f => !Path.GetDirectoryName(f).Contains("Duplicates"));
             var pictures = allFiles.Where(f => f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase));
             var movies = allFiles.Where(f => f.EndsWith(".MOV", StringComparison.OrdinalIgnoreCase));
             var otherFiles = allFiles.Where(f => !(f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".MOV", StringComparison.OrdinalIgnoreCase)));
@@ -47,7 +47,7 @@ namespace PicturesVideosOrganizer
             CreateFolderIfNotExist(parentFolderPath, "OtherFiles");
             var otherFilesFolder = parentFolderPath + @"\OtherFiles";
             foreach (var otherFile in otherFiles)
-            { 
+            {
                 MoveToFolder(otherFilesFolder, otherFile, otherFilesFolder);
             }
         }
@@ -80,7 +80,7 @@ namespace PicturesVideosOrganizer
         private static void MoveToFolder(string parentFolderPath, string filePath, string newFolderPath, int duplicateCounter = 0)
         {
             var fileName = Path.GetFileName(filePath);
-            
+
             if (duplicateCounter > 0)
             {
                 fileName = string.Format("{0}_Dup{1}{2}", Path.GetFileNameWithoutExtension(filePath), duplicateCounter, Path.GetExtension(filePath));
@@ -115,7 +115,7 @@ namespace PicturesVideosOrganizer
             using (var image = Image.FromStream(fs, false, false))
             {
                 const int propertyId = 36867;
-                if (!image.PropertyIdList.Any(propId => propId == propertyId)) 
+                if (!image.PropertyIdList.Any(propId => propId == propertyId))
                     return File.GetCreationTime(path);
 
                 var propItem = image.GetPropertyItem(propertyId);
