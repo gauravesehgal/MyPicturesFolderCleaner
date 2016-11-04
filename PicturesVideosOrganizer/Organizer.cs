@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace PicturesVideosOrganizer
 {
@@ -13,20 +14,23 @@ namespace PicturesVideosOrganizer
     {
         private static readonly Regex R = new Regex(":");
 
-        public static void Organize(string parentFolderPath)
+        public static Task Organize(string folderPath)
         {
-            if (!Directory.Exists(parentFolderPath))
-                throw new IOException("Folder selected is not a valid folder.");
+            return Task.Factory.StartNew(() =>
+            {
+                if (!Directory.Exists(folderPath))
+                    throw new IOException("Folder selected is not a valid folder.");
 
-            var allFiles = Directory.EnumerateFiles(parentFolderPath, "*.*", SearchOption.AllDirectories).Where(f => !Path.GetDirectoryName(f).Contains("Duplicates"));
-            var pictures = allFiles.Where(f => f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase));
-            var movies = allFiles.Where(f => f.EndsWith(".MOV", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".avi", StringComparison.OrdinalIgnoreCase));
-            var otherFiles = allFiles.Where(f => !(f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".MOV", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".avi", StringComparison.OrdinalIgnoreCase)));
+                var allFiles = Directory.EnumerateFiles(folderPath, "*.*", SearchOption.AllDirectories).Where(f => !Path.GetDirectoryName(f).Contains("Duplicates"));
+                var pictures = allFiles.Where(f => f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase));
+                var movies = allFiles.Where(f => f.EndsWith(".MOV", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".avi", StringComparison.OrdinalIgnoreCase));
+                var otherFiles = allFiles.Where(f => !(f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".MOV", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".avi", StringComparison.OrdinalIgnoreCase)));
 
-            OrganizePictures(parentFolderPath, pictures);
-            OrganizeMovies(parentFolderPath, movies);
-            OrganizeOtherFiles(parentFolderPath, otherFiles);
-            DeleteEmptyFolders(parentFolderPath);
+                OrganizePictures(folderPath, pictures);
+                OrganizeMovies(folderPath, movies);
+                OrganizeOtherFiles(folderPath, otherFiles);
+                DeleteEmptyFolders(folderPath);
+            });
         }
 
         private static void DeleteEmptyFolders(string parentFolderPath)

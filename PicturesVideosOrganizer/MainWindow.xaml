@@ -15,5 +15,6 @@
         <TextBox Grid.Row="0" Margin="10" Grid.Column="0" HorizontalAlignment="Left" Height="25"  TextWrapping="Wrap" Text="Select folder by clicking Browse button or paste the folder path here." VerticalAlignment="Top"  Width="380" Name="txtSelectedFolder"/>
         <Button Grid.Row="0" Margin="10" Grid.Column="1" Content="Browse" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="100" Click="BrowseButton_Click"/>
         <Button Grid.Row="1" Grid.ColumnSpan="2" Content="Organize" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="100"  Click="Organize_Click" Name="btnOrganize" Margin="10"/>
+        <ProgressBar HorizontalAlignment="Left" Height="20" Margin="0,42,0,-20" VerticalAlignment="Top" Width="544"  IsIndeterminate="True"  Name="progressBar" Visibility="Hidden" Grid.Row="1" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

@@ -1,0 +1,15 @@
+C:\Users\gsehgal\Source\Repos\PicturesVideosOrganizer\PicturesVideosOrganizer\bin\Debug\PicturesVideosOrganizer.exe.config
+C:\Users\gsehgal\Source\Repos\PicturesVideosOrganizer\PicturesVideosOrganizer\bin\Debug\PicturesVideosOrganizer.exe
+C:\Users\gsehgal\Source\Repos\PicturesVideosOrganizer\PicturesVideosOrganizer\bin\Debug\PicturesVideosOrganizer.pdb
+C:\Users\gsehgal\Source\Repos\PicturesVideosOrganizer\PicturesVideosOrganizer\obj\Debug\PicturesVideosOrganizer.csprojResolveAssemblyReference.cache
+C:\Users\gsehgal\Source\Repos\PicturesVideosOrganizer\PicturesVideosOrganizer\obj\Debug\MainWindow.baml
+C:\Users\gsehgal\Source\Repos\PicturesVideosOrganizer\PicturesVideosOrganizer\obj\Debug\MainWindow.g.cs
+C:\Users\gsehgal\Source\Repos\PicturesVideosOrganizer\PicturesVideosOrganizer\obj\Debug\App.g.cs
+C:\Users\gsehgal\Source\Repos\PicturesVideosOrganizer\PicturesVideosOrganizer\obj\Debug\PicturesVideosOrganizer_MarkupCompile.cache
+C:\Users\gsehgal\Source\Repos\PicturesVideosOrganizer\PicturesVideosOrganizer\obj\Debug\PicturesVideosOrganizer.g.resources
+C:\Users\gsehgal\Source\Repos\PicturesVideosOrganizer\PicturesVideosOrganizer\obj\Debug\PicturesVideosOrganizer.Properties.Resources.resources
+C:\Users\gsehgal\Source\Repos\PicturesVideosOrganizer\PicturesVideosOrganizer\obj\Debug\PicturesVideosOrganizer.csproj.GenerateResource.Cache
+C:\Users\gsehgal\Source\Repos\PicturesVideosOrganizer\PicturesVideosOrganizer\obj\Debug\PicturesVideosOrganizer.exe
+C:\Users\gsehgal\Source\Repos\PicturesVideosOrganizer\PicturesVideosOrganizer\obj\Debug\PicturesVideosOrganizer.pdb
+C:\Users\gsehgal\Source\Repos\PicturesVideosOrganizer\PicturesVideosOrganizer\bin\Debug\log4net.dll
+C:\Users\gsehgal\Source\Repos\PicturesVideosOrganizer\PicturesVideosOrganizer\bin\Debug\log4net.xml

@@ -24,27 +24,18 @@ namespace PicturesVideosOrganizer
 
         private void Organize_Click(object sender, RoutedEventArgs e)
         {
-            var backgroundWorker = new BackgroundWorker();
-            backgroundWorker.DoWork += backgroundWorker_DoWork;
-            backgroundWorker.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
+            Organize(txtSelectedFolder.Text);
+        }
 
+        private async void Organize(string selectedFolderPath)
+        {
             btnOrganize.IsEnabled = false;
-            backgroundWorker.RunWorkerAsync(txtSelectedFolder.Text);
-        }
-
-        void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
+            progressBar.Visibility = Visibility.Visible;
+            await Organizer.Organize(selectedFolderPath);
+            progressBar.Visibility = Visibility.Hidden;
             btnOrganize.IsEnabled = true;
-
-            if (e.Error != null)
-                throw e.Error;
-            
-            MessageBox.Show("Organizing pictures done. Duplicates are moved to duplicates folder, Other files are moved to OtherFiles folder, Empty folders are deleted.", "Aha...",MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Organizing pictures done. Duplicates are moved to duplicates folder, Other files are moved to OtherFiles folder, Empty folders are deleted.", "Aha...", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            Organizer.Organize((string)e.Argument);
-        }
     }
 }
