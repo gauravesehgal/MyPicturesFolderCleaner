@@ -1,6 +1,4 @@
-.. image:: https://ci.appveyor.com/api/projects/status/uc1baq2flxc798tc?svg=true
-   :target: https://ci.appveyor.com/project/sehgalg/picturesvideosorganizer
-   :alt: AppVeyor Build Status
+[![Build status](https://ci.appveyor.com/api/projects/status/uc1baq2flxc798tc?svg=true)](https://ci.appveyor.com/project/sehgalg/picturesvideosorganizer)
    
 # Pictures and Videos Organizer
 ### Organizes Pictures (JPEGs), Videos (.MOV) and any other files in the same folder.
